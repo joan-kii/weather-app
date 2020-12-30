@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href='style.css'>
+  <title>Weather App</title>
+</head>
+<body>
+  <h1 class='title'>The Weather</h1>
+  <input type='text' placeholder='Enter a city'>
+  <p id='errorText'></p>
+  <div class='container'>
+    <input id='tempUnit' type='checkbox'>
+    <h2 id='infoCity'></h2>
+    <div class='mainInfo'>
+      <p id='infoWeather'></p>
+      <p id='infoTemp'></p>
+      <p id='infoHumidity'></p>
+      <p id='infoWind'></p>
+      <p id='infoHour'></p>
+    </div>
+  </div>
+  <img id='gifImage' class='gifImage'>
+  <footer>
+    <p>Powered by: 
+      <a noopener noreferrer target='_blank' href='https://openweathermap.org/'>OpenWeatherMap API</a>
+    </p>
+    <a noopener noreferrer target='_blank' href='https://github.com/joan-kii?tab=repositories'>joankii's Github</a>
+  </footer>
+  <script src='index.js'></script>
+</body>
+</html>
