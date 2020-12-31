@@ -1,8 +1,9 @@
 // Inputs
 
 let place = 'Marbella';
-let isCelsius = false;
+let isCelsius = true;
 let tempUnit = 'C';
+let temperature = '';
 const API_KEY = 'ee2bedb8918a0bd649949ff77b458184';
 
 const inputCityForm = document.getElementById('inputCityForm');
@@ -28,7 +29,7 @@ tempCelsius.addEventListener('change', e => {
   e.preventDefault();
   isCelsius = !isCelsius;
   tempUnit = isCelsius ? 'C' : 'F';
-  updateTemperature();
+  getWeather();
 });
 
 // Functions 
@@ -44,7 +45,8 @@ const getWeather = async () => {
       place: weatherData.name + ', ' + weatherData.sys.country,
       description: weatherData.weather[0].description.replace(/\b\w/g, letter => (
         letter.toUpperCase())),
-      temperature: weatherData.main.temp,
+      tempInCelsius: weatherData.main.temp.toFixed(1),
+      tempInFahrenheit: (weatherData.main.temp * 1.8 + 32).toFixed(1),
       humidity: weatherData.main.humidity + '%',
       wind: (weatherData.wind.speed * 3.6).toFixed(1) + ' km/h'
       };
@@ -57,21 +59,17 @@ const getWeather = async () => {
 };
     
 const showWeather = (weather) => {
-  console.log(weather)
   infoCity.textContent = weather.place;
   infoWeather.textContent = weather.description;
-  infoTemp.textContent = setTemperature(weather.temperature);
+  infoTemp.textContent = setTemperature(weather.tempInCelsius, 
+    weather.tempInFahrenheit);
   infoHumidity.textContent = weather.humidity;
   infoWind.textContent = weather.wind;
 };
 
-const setTemperature = (temperature) => isCelsius ? 
-  temperature + 'º ' + `${tempUnit}` : 
-  (temperature * 1.8 + 32).toFixed(1) + 'º ' + `${tempUnit}`;
-
-const updateTemperature = () => {
-  infoTemp.textContent = setTemperature();
-};
+const setTemperature = (tempInCelsius, tempInFahrenheit) => isCelsius ? 
+  tempInCelsius.toString() + 'º ' + `${tempUnit}` : 
+  tempInFahrenheit.toString() + 'º ' + `${tempUnit}`;
 
 const showError = (err) => {
   console.error(err);
