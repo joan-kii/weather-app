@@ -7,18 +7,22 @@
   <title>Weather App</title>
 </head>
 <body>
-  <h1 class='title'>The Weather</h1>
-  <input type='text' placeholder='Enter a city'>
+  <h1 class='title'>El Tiempo</h1>
+  <form id='inputCityForm'>
+    <input id='inputCity' 
+      type='text' 
+      placeholder='El tiempo en...'
+      required>
+  </form>
   <p id='errorText'></p>
   <div class='container'>
-    <input id='tempUnit' type='checkbox'>
+    <input id='tempCelsius' type='checkbox'>
     <h2 id='infoCity'></h2>
     <div class='mainInfo'>
       <p id='infoWeather'></p>
-      <p id='infoTemp'></p>
-      <p id='infoHumidity'></p>
-      <p id='infoWind'></p>
-      <p id='infoHour'></p>
+      <p>Temperatura: <span id='infoTemp'></span></p>
+      <p>Humedad: <span id='infoHumidity'></span></p>
+      <p>Viento: <span id='infoWind'></span></p>
     </div>
   </div>
   <img id='gifImage' class='gifImage'>
