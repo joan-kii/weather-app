@@ -4,37 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href='style.css'>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@1,300&display=swap" 
+    rel="stylesheet"> 
   <title>Weather App</title>
 </head>
 <body>
-  <h1 class='title'>El Tiempo</h1>
-  <form id='inputCityForm'>
-    <input id='inputCity' 
-      type='text' 
-      placeholder='El tiempo en...'
-      required>
-  </form>
-  <p id='weatherErrorText'></p>
-  <div id = 'container' class='container'>
-    <input id='tempCelsius' type='checkbox'>
-    <h2 id='infoCity'></h2>
-    <div class='mainInfo'>
-      <p id='infoWeather'></p>
-      <p>Temperatura: <span id='infoTemp'></span></p>
-      <p>Humedad: <span id='infoHumidity'></span></p>
-      <p>Viento: <span id='infoWind'></span></p>
+
+  <header class='topbar'>
+    <h1 class='title'>El Tiempo</h1>
+    <form id='inputCityForm' class='inputCityForm'>
+      <input id='inputCity'
+        class='inputCity' 
+        type='text' 
+        placeholder='El tiempo en...'
+        autocomplete='off'
+        required>
+      <button type='submit'
+        class='submitButton'>
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          width="16" height="16" 
+          fill="currentColor" 
+          class="bi bi-search" 
+          viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </button>
+    </form>
+  </header>  
+
+  <main class='content'>
+    <p id='weatherErrorText' class='weatherErrorText'></p>
+
+    <div class='container'>
+      <h2 id='infoCity' class='infoCity'></h2>
+      <input id='tempCelsius' type='checkbox' class='tempCelsius'>
+      <div class='mainInfo'>
+        <p id='infoWeather'></p>
+        <p>Temperatura: <span id='infoTemp'></span></p>
+        <p>Humedad: <span id='infoHumidity'></span></p>
+        <p>Viento: <span id='infoWind'></span></p>
+      </div>
     </div>
-  </div>
-  <img id='gifImage' class='gifImage'>
-  <p id='gifErrorText'></p>
-  <footer>
+
+    <div class='gifContent'>
+      <img id='gifImage' class='gifImage'>
+      <p id='gifErrorText'></p>
+    </div>
+  </main>  
+
+  <footer class='footbar'>
     <p>Powered by: 
-      <a noopener noreferrer target='_blank' href='https://openweathermap.org/'>OpenWeatherMap API</a>
-      <br>
-      <a noopener noreferrer target='_blank' href='https://developers.giphy.com/'>giphy.com</a>
+      <a noopener noreferrer 
+         target='_blank' 
+         href='https://openweathermap.org/'>
+         openweathermap.com</a>
+      <a noopener noreferrer 
+         target='_blank' 
+         href='https://developers.giphy.com/'>
+         giphy.com</a>
     </p>
-    <a noopener noreferrer target='_blank' href='https://github.com/joan-kii?tab=repositories'>joankii's Github</a>
+
+    <p>
+      <a noopener noreferrer 
+        target='_blank' 
+        href='https://github.com/joan-kii?tab=repositories'>
+        joankii's Github</a>
+    </p>
   </footer>
+
   <script src='index.js'></script>
 </body>
 </html>

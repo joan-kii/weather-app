@@ -1,0 +1,96 @@
+body {
+  font-family: 'Zilla Slab', serif;
+  margin: 0;
+  background-image: url('./assets/clouds.jpg');
+}
+
+a {
+  font-size: 1.5em;
+  color: white;
+  padding: 0.5em;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: white;
+  background-color: #00aeef;
+}
+
+.title {
+  margin: 0;
+  padding: 0 3rem;
+  font-size: 3em;
+  cursor: default;
+}
+
+.inputCityForm {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+}
+
+.inputCity {
+  width: 20%;
+  height: 2.2em;
+  padding-left: 1em;
+  box-sizing: border-box;
+  outline: none;
+  border: 2px solid #0089bb;
+  border-radius: 7px;
+  font-size: 1em;
+}
+
+.submitButton {
+  background-color: white;
+  border: 2px solid #0089bb;
+  border-radius: 7px;
+  color: grey;
+  margin-left: 2px;
+}
+
+.content {
+  position: fixed;
+  display: flex;
+  width: 74%;
+  margin-left: 13%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoCity {
+  font-size: 2.5em;
+  padding-left: 40%;
+  color: #0089bb;
+}
+
+.mainInfo {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5em;
+  color: gray;
+}
+
+.gifImage {
+  border-radius: 7px;
+}
+
+.footbar {
+  position: absolute;
+  bottom: 0;
+  display: flex; 
+  justify-content: space-around;
+  width: 100%;;
+  height: 4rem;
+  color: white;
+  background-color: #00aeef;
+}

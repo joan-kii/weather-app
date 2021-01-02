@@ -3,7 +3,7 @@
 let place = 'Marbella';
 let isCelsius = true;
 let tempInCelsiusFormat = '';
-let tempInFaherenheitFormat = '';
+let tempInFahrenheitFormat = '';
 const OPENWEATHER_API_KEY = 'ee2bedb8918a0bd649949ff77b458184';
 const GIPHY_API_KEY = '6Yu5WjOIzRpZDtkElXYyErU6wMH3SOwG';
 
@@ -37,17 +37,17 @@ tempCelsius.addEventListener('change', e => {
 // Functions 
 
 const getWeather = async () => {
-  const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&lang=sp&appid=${OPENWEATHER_API_KEY}`;
+  const OPENWEATHER_API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&lang=sp&appid=${OPENWEATHER_API_KEY}`;
   
   try {
-    const response = await fetch(API_URL, {mode: 'cors'});
+    const response = await fetch(OPENWEATHER_API_URL, {mode: 'cors'});
     const weatherData = await response.json();
 
     const weather = {
       mainWeather: weatherData.weather[0].main,
       place: weatherData.name + ', ' + weatherData.sys.country,
-      description: weatherData.weather[0].description.replace(/\b\w/g, letter => (
-        letter.toUpperCase())),
+      description: weatherData.weather[0].description
+        .replace(/\b\w/g, letter => (letter.toUpperCase())),
       tempInCelsius: weatherData.main.temp.toFixed(1),
       tempInFahrenheit: (weatherData.main.temp * 1.8 + 32).toFixed(1),
       humidity: weatherData.main.humidity + '%',
@@ -73,12 +73,13 @@ const showWeather = (weather) => {
 };
 
 const updateTemperature = () => { 
-  infoTemp.textContent = isCelsius ? tempInCelsiusFormat : tempInFaherenheitFormat;
+  infoTemp.textContent = isCelsius ? 
+    tempInCelsiusFormat : tempInFahrenheitFormat;
 };
 
 const setTemperature = (tempInCelsius, tempInFahrenheit) => {
   tempInCelsiusFormat = tempInCelsius.toString() + 'º ' + 'C';
-  tempInFaherenheitFormat = tempInFahrenheit.toString() + 'º ' + 'F';
+  tempInFahrenheitFormat = tempInFahrenheit.toString() + 'º ' + 'F';
   return updateTemperature();
 };
 
@@ -95,9 +96,10 @@ const showGifError = (err) => {
 
 const getGif = (mainWeather) => {
   const keyword = mainWeather === 'Clear' ? 'Sunny' : mainWeather;
-  fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${keyword}&weirdness=0`, {mode: 'cors'})
+  const GIPHY_API_URL = `https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${keyword}&weirdness=0`;
+  fetch(GIPHY_API_URL, {mode: 'cors'})
     .then(function(response) { 
-      return response.json()
+      return response.json();
     })
     .then(function(gifData) {
       gifImage.src = gifData.data.images.original.url;
