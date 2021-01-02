@@ -2,9 +2,10 @@
 
 let place = 'Marbella';
 let isCelsius = true;
-let tempUnit = 'C';
-let temperature = '';
-const API_KEY = 'ee2bedb8918a0bd649949ff77b458184';
+let tempInCelsiusFormat = '';
+let tempInFaherenheitFormat = '';
+const OPENWEATHER_API_KEY = 'ee2bedb8918a0bd649949ff77b458184';
+const GIPHY_API_KEY = '6Yu5WjOIzRpZDtkElXYyErU6wMH3SOwG';
 
 const inputCityForm = document.getElementById('inputCityForm');
 const inputCity = document.getElementById('inputCity');
@@ -14,7 +15,9 @@ const infoWeather = document.getElementById('infoWeather');
 const infoTemp = document.getElementById('infoTemp');
 const infoHumidity = document.getElementById('infoHumidity');
 const infoWind = document.getElementById('infoWind');
-const errorText = document.getElementById('errorText');
+const weatherErrorText = document.getElementById('weatherErrorText');
+const gifImage = document.getElementById('gifImage');
+const gifErrorText = document.getElementById('gifErrorText');
 
 //Listeners
 
@@ -28,20 +31,20 @@ inputCityForm.addEventListener('submit', (e) => {
 tempCelsius.addEventListener('change', e => {
   e.preventDefault();
   isCelsius = !isCelsius;
-  tempUnit = isCelsius ? 'C' : 'F';
-  getWeather();
+  updateTemperature();
 });
 
 // Functions 
 
 const getWeather = async () => {
-  const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&lang=sp&appid=${API_KEY}`;
+  const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${place}&units=metric&lang=sp&appid=${OPENWEATHER_API_KEY}`;
   
   try {
     const response = await fetch(API_URL, {mode: 'cors'});
     const weatherData = await response.json();
 
     const weather = {
+      mainWeather: weatherData.weather[0].main,
       place: weatherData.name + ', ' + weatherData.sys.country,
       description: weatherData.weather[0].description.replace(/\b\w/g, letter => (
         letter.toUpperCase())),
@@ -52,28 +55,57 @@ const getWeather = async () => {
       };
     
     showWeather(weather);
+    setTemperature(weather.tempInCelsius, weather.tempInFahrenheit);
+    getGif(weather.mainWeather);
         
   } catch (err) {
-      showError(err);
+      showWeatherError(err);
   }
 };
     
 const showWeather = (weather) => {
   infoCity.textContent = weather.place;
   infoWeather.textContent = weather.description;
-  infoTemp.textContent = setTemperature(weather.tempInCelsius, 
-    weather.tempInFahrenheit);
   infoHumidity.textContent = weather.humidity;
   infoWind.textContent = weather.wind;
+  weatherErrorText.textContent = '';
+  gifErrorText.textContent = '';
 };
 
-const setTemperature = (tempInCelsius, tempInFahrenheit) => isCelsius ? 
-  tempInCelsius.toString() + 'º ' + `${tempUnit}` : 
-  tempInFahrenheit.toString() + 'º ' + `${tempUnit}`;
+const updateTemperature = () => { 
+  infoTemp.textContent = isCelsius ? tempInCelsiusFormat : tempInFaherenheitFormat;
+};
 
-const showError = (err) => {
+const setTemperature = (tempInCelsius, tempInFahrenheit) => {
+  tempInCelsiusFormat = tempInCelsius.toString() + 'º ' + 'C';
+  tempInFaherenheitFormat = tempInFahrenheit.toString() + 'º ' + 'F';
+  return updateTemperature();
+};
+
+const showWeatherError = (err) => {
   console.error(err);
-  errorText.textContent = 'Vaya, no podemos encontrar la ciudad. Inténtalo de nuevo.';
+  weatherErrorText.textContent = 'Vaya, no podemos encontrar la ciudad. Inténtalo de nuevo.';
+};
+
+const showGifError = (err) => {
+  console.error(err);
+  gifErrorText.textContent = 'Vaya, no hemos podido encontrar un gif.';
+  gifImage.src = getGif('oops');
+};
+
+const getGif = (mainWeather) => {
+  const keyword = mainWeather === 'Clear' ? 'Sunny' : mainWeather;
+  fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${GIPHY_API_KEY}&s=${keyword}&weirdness=0`, {mode: 'cors'})
+    .then(function(response) { 
+      return response.json()
+    })
+    .then(function(gifData) {
+      gifImage.src = gifData.data.images.original.url;
+    })
+
+    .catch (function(err) {
+      showGifError(err);
+    })
 };
 
 getWeather();
