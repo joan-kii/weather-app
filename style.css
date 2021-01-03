@@ -1,6 +1,7 @@
 body {
   font-family: 'Zilla Slab', serif;
   margin: 0;
+  height: 95vh;
   background-image: url('./assets/clouds.jpg');
 }
 
@@ -8,6 +9,10 @@ a {
   font-size: 1.5em;
   color: white;
   padding: 0.5em;
+}
+
+button:hover {
+  color: #00aeef;
 }
 
 .topbar {
@@ -35,6 +40,7 @@ a {
 .inputCity {
   width: 20%;
   height: 2.2em;
+  color: gray;
   padding-left: 1em;
   box-sizing: border-box;
   outline: none;
@@ -46,38 +52,61 @@ a {
 .submitButton {
   background-color: white;
   border: 2px solid #0089bb;
+  outline: none;
   border-radius: 7px;
   color: grey;
   margin-left: 2px;
+  cursor: pointer;
 }
 
 .content {
-  position: fixed;
   display: flex;
+  margin: auto;
   width: 74%;
-  margin-left: 13%;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
   background-color: white;
+}
+
+.weatherErrorText {
+  font-size: 1.5em;
+  color: grey;
+  margin: 7px auto;
 }
 
 .container {
   display: flex;
+  margin: 0 auto;
   flex-direction: column;
+  align-items: center;
 }
 
 .infoCity {
   font-size: 2.5em;
-  padding-left: 40%;
   color: #0089bb;
+  margin: 5px;
+}
+
+.infoWeather {
+  color: gray;
+  font-size: 1.7em;
 }
 
 .mainInfo {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 1.5em;
   color: gray;
+}
+
+.mainInfo p {
+  margin: 15px 15px;
+}
+
+.gifContent {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .gifImage {
@@ -85,7 +114,7 @@ a {
 }
 
 .footbar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: flex; 
   justify-content: space-around;
