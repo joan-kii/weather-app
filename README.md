@@ -1,0 +1,1 @@
+Ejercicio sobre promises y async/await The Odin Project. Puedes echarle un vistazo [aquí](https://joan-kii.github.io/weather-app/).

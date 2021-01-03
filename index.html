@@ -6,7 +6,7 @@
   <link rel="stylesheet" href='style.css'>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@1,300&display=swap" 
-    rel="stylesheet"> 
+    rel="stylesheet">
   <title>Weather App</title>
 </head>
 <body>
@@ -39,7 +39,14 @@
     <div class='container'>
       <h2 id='infoCity' class='infoCity'></h2>
       <p id='infoWeather' class='infoWeather'></p>
-      <input id='tempCelsius' type='checkbox' class='tempCelsius'>
+      <div class='tempSwitch'>
+        <p>ºC</p>
+        <label class='switch'>
+          <input id='tempCelsius' type='checkbox'>
+          <div class='slider'></div>
+        </label>
+        <p>ºF</p>
+      </div>
       <div class='mainInfo'>
         <p>Temperatura: <span id='infoTemp'></span></p>
         <p>Humedad: <span id='infoHumidity'></span></p>
